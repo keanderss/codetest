@@ -3,7 +3,7 @@ version: "3.8"
 services:
   codetestdb:
     image: postgres
-    restart: unless-stopped
+    ##restart: unless-stopped
     env_file: ./.env
     environment:
       - POSTGRES_USER=$POSTGRESDB_USER
@@ -17,7 +17,7 @@ services:
     depends_on:
       - codetestdb
     build: .
-    restart: on-failure
+    ##restart: on-failure
     env_file: ./.env
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
@@ -27,7 +27,8 @@ services:
         "spring.datasource.username" : "$POSTGRESDB_USER",
         "spring.datasource.password" : "$POSTGRESDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
+        "spring.jpa.hibernate.ddl-auto" : "update",
+        "spring.jpa.show-sql" : "true"
       }'
     volumes:
       - .m2:/root/.m2
