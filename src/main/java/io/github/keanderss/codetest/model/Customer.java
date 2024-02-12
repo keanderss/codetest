@@ -34,6 +34,26 @@ public class Customer implements Serializable {
     public void setCustomerCode(String string) {
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public double getLoan() {
+        return this.loan;
+    }
+
+    public double getInterest() {
+        return this.interest;
+    }
+
+    public int getYears() {
+        return years;
+    }
+
     public double getMonthlyPayment() {
         int Z = this.years;
         int p = 12*Z;
