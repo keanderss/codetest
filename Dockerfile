@@ -4,4 +4,4 @@ WORKDIR /app
 COPY . .
 RUN mvn clean install
 
-CMD mvn spring-boot:run -e
+CMD mvn spring-boot:run

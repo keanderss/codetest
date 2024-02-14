@@ -13,6 +13,15 @@ services:
       - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
     volumes:
       - db:/var/lib/postgres
+  codetest-app:
+    depends_on:
+      - codetestdb
+      - codetest
+    build: ./codetest-app/.
+    env_file:
+      - ./.env
+    ports:
+      - $APP_LOCAL_PORT:$APP_DOCKER_PORT
   codetest:
     depends_on:
       - codetestdb

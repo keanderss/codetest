@@ -1,0 +1,64 @@
+<main class="main">
+  <div class="content">
+    <div class="title">
+      <h1>Codetest</h1>
+      <br>
+    </div>
+    <div class="left-side">
+      <div class="left-title">
+        <h2>Mortgage Plan</h2>
+      </div>
+      <div class="customer-list">
+        @defer (on viewport) {
+          <br>
+          <ul>
+            @for (customer of customers; track customer.id) {
+              <li>{{ customer.name }} wants to borrow {{ customer.loan }} € for a period of {{ customer.years }} years and pay {{ customer.monthlyPayment }} € each month</li>
+              <br>
+            }
+          </ul>
+          <br>
+        } @placeholder {
+          <p> Customers </p>
+        } @loading (minimum 1s) {
+          <p class="loading"> Loading customers...</p>
+        }
+      </div>
+    </div>
+    <br>
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <br>
+    <div class="right-side">
+      <div class="right-title">
+        <h2>Funds</h2>
+      </div>
+      <div class="fund-table">
+        @defer (on viewport) {
+          <table>
+            <tr>
+              <th>Fund Name</th>
+              <th>Change past month</th>
+              <th>Change past 3 months</th>
+              <th>Change past 3 years</th>
+            </tr>
+            @for (data of apiResponse; track data.data ) {
+              @for (fund of data.data; track fund.instrumentId ) {
+                <tr>
+                  <td>{{ fund.fundName }}</td>
+                  <td>{{ fund.change1m }}</td>
+                  <td>{{ fund.change3m }}</td>
+                  <td>{{ fund.change3y }}</td>
+                </tr>
+              }
+            }
+          </table>
+        } @placeholder {
+          <p> funds </p>
+        } @loading (minimum 1s) {
+          <p class="loading"> Loading funds... </p>
+        }
+      </div>
+    </div>
+  </div>
+</main>
+<router-outlet />
