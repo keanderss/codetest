@@ -23,6 +23,7 @@ public class CodetestApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(CodetestApplication.class, args);
+        // Reads file and adds each line into a list of lines
         File file = new File("prospects.txt");
         Scanner scan = new Scanner(file);
         while (scan.hasNext()) {
@@ -31,8 +32,10 @@ public class CodetestApplication {
                 lines.add(line);
             }
         }
+        // Removes first and last line
         lines.remove(lines.getFirst());
         lines.remove(lines.getLast());
+        // Formats the file contents
         List<String> temp;
         List<List<String>> temp2 = new ArrayList<>();
         for (String line : lines) {
@@ -41,18 +44,28 @@ public class CodetestApplication {
             temp = new ArrayList<>(List.of(line.split(" ")));
             temp2.add(temp);
         }
+        int n = 1;
         ArrayList<String> customers = new ArrayList<>();
         for (List<String> stringList: temp2) {
+            // If customer has first and last name we combine them into one name string
             if (stringList.size() > 4) {
                 stringList.set(1, stringList.get(0) + " " + stringList.get(1));
                 stringList.removeFirst();
             }
+            // Creates a new customer object and prints output
             Customer customer = new Customer(stringList.get(0), Float.parseFloat(stringList.get(1)), Float.parseFloat(stringList.get(2)), Integer.parseInt(stringList.get(3)));
+            System.out.println("****************************************************************************************************");
+            System.out.println();
+            System.out.println("Prospect " + n + ": " + customer.getName() + " wants to borrow " + customer.getLoan() + " € for a period of " + customer.getYears() + " years and pay " + customer.getMonthlyPayment() + " € each month");
+            System.out.println();
+            System.out.println("****************************************************************************************************");
+            // Writes object to json and adds it to list of customers
             customers.add(objectWriter.writeValueAsString(customer));
+            n++;
         }
+        // Sends requests to the api to add the customers into the database
         URL url = new URL("http://localhost:8080/customer/add");
         for (String customer : customers) {
-            System.out.println(customer);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");

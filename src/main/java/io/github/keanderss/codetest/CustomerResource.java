@@ -19,33 +19,17 @@ public class CustomerResource {
         this.customerService = customerService;
     }
 
+    // endpoint to return all customers in db
     @GetMapping("/all")
     public ResponseEntity<List<Customer>> getAllCustomers () {
         List<Customer> customers = customerService.findAllCustomers();
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Customer> getCustomerById (@PathVariable("id") Long id) {
-        Customer customer = customerService.findCustomerById(id);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
-    }
-
+    // endpoint to add customer to db
     @PostMapping("/add")
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         Customer newCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
-        Customer newCustomer = customerService.addCustomer(customer);
-        return new ResponseEntity<>(newCustomer, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id) {
-        customerService.deleteCustomer(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

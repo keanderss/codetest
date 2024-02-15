@@ -11,15 +11,15 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue
     @Column(nullable = false, updatable = false)
-    private Long id;
+    private Long id; // customer id
     @Column(nullable = false)
-    private String name;
+    private String name; // customer name
     @Column(nullable = false)
-    private double loan;
+    private double loan; // the amount owed by the customer
     @Column(nullable = false)
-    private double interest;
+    private double interest; // the loans yearly interest as a percentage
     @Column(nullable = false)
-    private int years;
+    private int years; // the loan duration
 
     public Customer() {
     }
@@ -55,8 +55,8 @@ public class Customer implements Serializable {
         int Z = this.years;
         int p = 12*Z;
         double U = this.loan;
-        double b = this.interest/100/12;
-        return U*(b*(exp(1+b,p)))/(exp(1+b,p)-1);
+        double b = this.interest/100/12; // convert yearly interest to monthly interest
+        return U*(b*(exp(1+b,p)))/(exp(1+b,p)-1); // formula
     }
 
     private double exp(double a, int b){

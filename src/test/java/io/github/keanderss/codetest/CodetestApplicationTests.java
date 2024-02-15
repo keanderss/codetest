@@ -11,21 +11,15 @@ class CodetestApplicationTests {
     @Test
     void testCustomer() {
         String testCustomerName = "NAME";
-        double testCustomerLoan = 1200;
-        double testCustomerInterest = 0;
-        int testCustomerYears = 1;
+        double testCustomerLoan = 1000000;
+        double testCustomerInterest = 99;
+        int testCustomerYears = 30;
         Customer testCustomer = new Customer(testCustomerName,testCustomerLoan,testCustomerInterest,testCustomerYears);
-        System.out.println(testCustomer.getName());
-        System.out.println(testCustomer.getLoan());
-        System.out.println(testCustomer.getInterest());
-        System.out.println(testCustomer.getYears());
-        System.out.println(testCustomer.getMonthlyPayment());
-        //Assertions.assertEquals(100, testCustomer.getMonthlyPayment());
+        Assertions.assertEquals("NAME", testCustomer.getName());
+        Assertions.assertEquals(1000000, testCustomer.getLoan());
+        Assertions.assertEquals(99, testCustomer.getInterest());
+        Assertions.assertEquals(30, testCustomer.getYears());
+        Assertions.assertEquals(82500, (int) testCustomer.getMonthlyPayment());
     }
 
-//    @Test
-//    void contextLoads() {
-//    }
-// TODO:
-// TEST THAT MORTGAGE CALCULATIONS FOR CUSTOMERS ARE CORRECT
 }
