@@ -31,9 +31,6 @@ public class Customer implements Serializable {
         this.years = years;
     }
 
-    public void setCustomerCode(String string) {
-    }
-
     public Long getId() {
         return this.id;
     }
@@ -58,8 +55,8 @@ public class Customer implements Serializable {
         int Z = this.years;
         int p = 12*Z;
         double U = this.loan;
-        double b = this.interest/100;
-        return U*(b*exp(1+b,p))/(exp(1+b,p)-1);
+        double b = this.interest/100/12;
+        return U*(b*(exp(1+b,p)))/(exp(1+b,p)-1);
     }
 
     private double exp(double a, int b){

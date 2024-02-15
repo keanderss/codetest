@@ -31,12 +31,6 @@ public class CustomerResource {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    @GetMapping("/monthly/{id}")
-    public ResponseEntity<Double> getMonthlyById (@PathVariable("id") Long id) {
-        Customer customer = customerService.findCustomerById(id);
-        return new ResponseEntity<>(customer.getMonthlyPayment(), HttpStatus.OK);
-    }
-
     @PostMapping("/add")
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         Customer newCustomer = customerService.addCustomer(customer);
