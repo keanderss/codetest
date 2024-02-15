@@ -6,4 +6,4 @@ This project requires [Docker](https://www.docker.com) and [Docker Compose](http
 ### 2. Run project
 Navigate to the repository on your local machine and run the command:
 
-`docker-compose up --build`
+`docker-compose up`

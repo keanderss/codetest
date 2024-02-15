@@ -13,21 +13,18 @@
           <br>
           <ul>
             @for (customer of customers; track customer.id) {
-              <li>{{ customer.name }} wants to borrow {{ customer.loan }} € for a period of {{ customer.years }} years and pay {{ customer.monthlyPayment }} € each month</li>
+              <li>{{ customer.name }} wants to borrow {{ customer.loan | number: '1.0-2' }} € for a period of {{ customer.years | number : '1.0' }} years and pay {{ customer.monthlyPayment | number: '1.0-2' }} € each month</li>
               <br>
             }
           </ul>
           <br>
         } @placeholder {
-          <p> Customers </p>
+          <p class="loading"> Customers </p>
         } @loading (minimum 1s) {
           <p class="loading"> Loading customers...</p>
         }
       </div>
     </div>
-    <br>
-    <div class="divider" role="separator" aria-label="Divider"></div>
-    <br>
     <div class="right-side">
       <div class="right-title">
         <h2>Funds</h2>
@@ -53,7 +50,7 @@
             }
           </table>
         } @placeholder {
-          <p> funds </p>
+          <p class="loading"> funds </p>
         } @loading (minimum 1s) {
           <p class="loading"> Loading funds... </p>
         }

@@ -58,7 +58,7 @@ public class Customer implements Serializable {
         int Z = this.years;
         int p = 12*Z;
         double U = this.loan;
-        double b = this.interest;
+        double b = this.interest/100;
         return U*(b*exp(1+b,p))/(exp(1+b,p)-1);
     }
 
